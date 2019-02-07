@@ -2,6 +2,7 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import DesktopContainer from './DesktopContainer'
 import MobileContainer from './MobileContainer'
+import MessageForm from './MessageForm'
 import {
   Button,
   Container,
@@ -113,6 +114,18 @@ const HomepageLayout = () => (
         <Button as='a' size='large'>
           I'm Still Quite Interested
         </Button>
+      </Container>
+    </Segment>
+    
+    <Segment style={{ padding: '8em 0em' }} vertical>
+      <Container text>
+        <Header as='h3' style={{ fontSize: '2em' }}>
+          Did We Tell You About Our Bananas?
+        </Header>
+        <p style={{ fontSize: '1.33em' }}>
+          Send me a message :)
+        </p>
+        <MessageForm />
       </Container>
     </Segment>
 

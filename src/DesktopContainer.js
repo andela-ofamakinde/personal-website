@@ -54,6 +54,7 @@ class DesktopContainer extends Component {
                 </Menu.Item>
                 <Menu.Item as='a'>Work</Menu.Item>
                 <Menu.Item as='a'>Blog</Menu.Item>
+                <Menu.Item as='a'>Tutorials</Menu.Item>
                 <Menu.Item as='a'>Find Me</Menu.Item>
               </Container>
             </Menu>
