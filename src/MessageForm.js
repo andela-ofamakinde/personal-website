@@ -1,17 +1,23 @@
 import React from 'react'
-import { Form, Input, TextArea, Button } from 'semantic-ui-react'
+import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react'
 
 class MessageForm extends React.Component {
   state = {firstName:'', lastName: '', email:'', message:''};
   
   handleSumbit = event => {
-    event.preventDefault()
-    console.log(this.state, "this state")
+    event.preventDefault();
+    const data = {
+      firstName: this.state.firstName, 
+      lastName: this.state.lastName, 
+      email: this.state.email, 
+      message: this.state.message
+    };
+    this.props.onSubmit(data)
   };
   
   render() {
     return (
-      <Form onSubmit={this.handleSumbit}>
+      <Form success onSubmit={this.handleSumbit}>
         <Form.Group widths='equal'>
           <Form.Field
             id='form-input-control-first-name'
@@ -51,9 +57,10 @@ class MessageForm extends React.Component {
         <Form.Field
           id='form-button-control-public'
           control={Button}
-          content='Confirm'
+          content='Send'
           size='large'
         />
+        <Message success header='Form Completed' content="You're all signed up for the newsletter" />
       </Form>
     )
   }
