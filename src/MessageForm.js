@@ -1,5 +1,6 @@
-import React from 'react'
-import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react'
+import React from 'react';
+import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
+import axios from 'axios';
 
 class MessageForm extends React.Component {
   state = {firstName:'', lastName: '', email:'', message:''};
@@ -12,7 +13,15 @@ class MessageForm extends React.Component {
       email: this.state.email, 
       message: this.state.message
     };
-    this.props.onSubmit(data)
+    this.props.onSubmit(data);
+    axios.post('http://localhost:8080/user/add', data)
+      .then(res => console.log(res.data));
+      this.setState({
+        firstName:'', 
+        lastName: '', 
+        email:'', 
+        message:''
+      })
   };
   
   render() {
