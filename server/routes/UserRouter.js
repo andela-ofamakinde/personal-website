@@ -3,7 +3,7 @@ const UserRouter = express.Router();
 
 const User = require('../models/User');
 
-UserRouter.route('/add').post(function (req, res) {
+UserRouter.route('/').post(function (req, res) {
   console.log(req.body, "req.body");
   
   const user = new User(req.body);

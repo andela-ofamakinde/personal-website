@@ -14,8 +14,6 @@ const User = new Schema({
   message: {
     type: String
   }
-},{
-    collection: 'users'
 });
 
 module.exports = mongoose.model('User', User);

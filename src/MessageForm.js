@@ -14,7 +14,7 @@ class MessageForm extends React.Component {
       message: this.state.message
     };
     this.props.onSubmit(data);
-    axios.post('http://localhost:8080/user/add', data)
+    axios.post('http://localhost:8080/users', data)
       .then(res => console.log(res.data));
       this.setState({
         firstName:'', 

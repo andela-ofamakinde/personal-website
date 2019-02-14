@@ -7,6 +7,8 @@ const path = require("path");
 const cors = require('cors');
 const config = require('./server/database/DB');
 const UserRouter = require('./server/routes/UserRouter');
+const BlogRouter = require('./server/routes/BlogRouter');
+
 
 mongoose.connect(config.DB).then(
   () => {console.log('Database is connected')},
@@ -23,7 +25,8 @@ app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
-app.use('/user', UserRouter);
+app.use('/users', UserRouter);
+app.use('/blog', BlogRouter);
 
 app.listen(PORT, function(){
   console.log('Server is running on Port: ',PORT);
