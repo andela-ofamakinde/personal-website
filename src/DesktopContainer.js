@@ -8,6 +8,8 @@ import {
   Segment,
   Visibility,
 } from 'semantic-ui-react'
+import { BrowserRouter as Router, Route, Link } from "react-router-dom"
+import Blog from './Blog'
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
@@ -26,44 +28,47 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
 
     return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
-            vertical
+      <Router>
+        <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+          <Visibility
+            once={false}
+            onBottomPassed={this.showFixedMenu}
+            onBottomPassedReverse={this.hideFixedMenu}
           >
-            <Menu
-              fixed={fixed ? 'top' : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size='large'
+            <Segment
+              inverted
+              textAlign='center'
+              style={{ minHeight: 700, padding: '1em 0em' }}
+              vertical
             >
-              <Container 
-              style={{ justifyContent: 
-                'space-around' }}
+              <Menu
+                fixed={fixed ? 'top' : null}
+                inverted={!fixed}
+                pointing={!fixed}
+                secondary={!fixed}
+                size='large'
               >
-                <Menu.Item as='a' active>
-                  Home
-                </Menu.Item>
-                <Menu.Item as='a'>Work</Menu.Item>
-                <Menu.Item as='a'>Blog</Menu.Item>
-                <Menu.Item as='a'>Tutorials</Menu.Item>
-                <Menu.Item as='a'>Find Me</Menu.Item>
-              </Container>
-            </Menu>
-            <HomepageHeading />
-          </Segment>
-        </Visibility>
+                <Container 
+                style={{ justifyContent: 
+                  'space-around' }}
+                >
+                  <Menu.Item as='a' active>
+                    Home
+                  </Menu.Item>
+                  <Menu.Item as='a'>Work</Menu.Item>
+                  <Menu.Item as='a'><Link to="/blog">Blog</Link></Menu.Item>
+                  <Menu.Item as='a'>Tutorials</Menu.Item>
+                  <Menu.Item as='a'>Find Me</Menu.Item>
+                  <Route path="/blog" component={Blog} />
+                </Container>
+              </Menu>
+              <HomepageHeading />
+            </Segment>
+          </Visibility>
 
-        {children}
-      </Responsive>
+          {children}
+        </Responsive>
+      </Router>
     )
   }
 }
