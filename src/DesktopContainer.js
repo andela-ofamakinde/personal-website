@@ -10,6 +10,7 @@ import {
 } from 'semantic-ui-react'
 import { BrowserRouter as Router, Route, Link } from "react-router-dom"
 import Blog from './Blog'
+import ContactForm from './ContactForm'
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
@@ -53,24 +54,24 @@ class DesktopContainer extends Component {
                   'space-around' }}
                 >
                   <Menu.Item as='a' active>
-                    Home
+                  <Link to="/home">Home</Link>
                   </Menu.Item>
                   <Menu.Item as='a'>Work</Menu.Item>
                   <Menu.Item as='a'><Link to="/blog">Blog</Link></Menu.Item>
                   <Menu.Item as='a'>Tutorials</Menu.Item>
-                  <Menu.Item as='a'>Find Me</Menu.Item>
-                  <Route path="/blog" component={Blog} />
+                  <Menu.Item as='a'><Link to="/contact">Find Me</Link></Menu.Item>
                 </Container>
               </Menu>
-              <HomepageHeading />
+                <Route path="/home" component={HomepageHeading} />
+                <Route path="/blog" component={Blog} />
+                <Route path="/contact" component={ContactForm} />
             </Segment>
           </Visibility>
-
           {children}
         </Responsive>
       </Router>
     )
-  }
+}
 }
 
 DesktopContainer.propTypes = {

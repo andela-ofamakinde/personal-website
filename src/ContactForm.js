@@ -2,7 +2,7 @@ import React from 'react';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 import axios from 'axios';
 
-class MessageForm extends React.Component {
+class ContactForm extends React.Component {
   state = {firstName:'', lastName: '', email:'', message:''};
   
   handleSumbit = event => {
@@ -75,4 +75,4 @@ class MessageForm extends React.Component {
   }
 }
 
-export default MessageForm
+export default ContactForm
