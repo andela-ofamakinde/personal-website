@@ -3,7 +3,7 @@ const BlogRouter = express.Router();
 
 const BlogPost = require('../models/Blog');
 
-BlogRouter.route('/add').post(function (req, res) {
+BlogRouter.route('/').post(function (req, res) {
   const entry = new BlogPost(req.body);
   entry.save()
     .then(entry => {
@@ -14,4 +14,14 @@ BlogRouter.route('/add').post(function (req, res) {
     });
 });
 
+BlogRouter.route('/').get(function (req, res) {
+  const entry = new BlogPost(req.body);
+  BlogPost.find()
+    .then(entry => {
+      res.json(entry);
+    })
+    .catch(err => {
+      res.status(400).send("unable to save blog entry to database");
+    });
+});
 module.exports = BlogRouter;

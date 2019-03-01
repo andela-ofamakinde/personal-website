@@ -53,13 +53,13 @@ class DesktopContainer extends Component {
                 style={{ justifyContent: 
                   'space-around' }}
                 >
-                  <Menu.Item as='a' active>
+                  <Menu.Item active>
                   <Link to="/home">Home</Link>
                   </Menu.Item>
-                  <Menu.Item as='a'>Work</Menu.Item>
-                  <Menu.Item as='a'><Link to="/blog">Blog</Link></Menu.Item>
-                  <Menu.Item as='a'>Tutorials</Menu.Item>
-                  <Menu.Item as='a'><Link to="/contact">Find Me</Link></Menu.Item>
+                  <Menu.Item>Work</Menu.Item>
+                  <Menu.Item><Link to="/blog">Blog</Link></Menu.Item>
+                  <Menu.Item>Tutorials</Menu.Item>
+                  <Menu.Item><Link to="/contact">Find Me</Link></Menu.Item>
                 </Container>
               </Menu>
                 <Route path="/home" component={HomepageHeading} />

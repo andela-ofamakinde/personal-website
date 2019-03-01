@@ -1,9 +1,26 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 import axios from 'axios';
 
-class BlogForm extends React.Component {
-  state = {author: '', content:''};
+class BlogPostDisplay extends Component {
+  render() {
+    const postMap = this.props.posts.map((post) => {
+      return (
+        <div>
+          <div>{post.author}</div>
+          <div>{post.content}</div>
+          <div>{post.date}</div>
+        </div>
+      )
+    })
+    return(
+      <div>{postMap}</div>
+    );
+  }
+}
+
+class BlogForm extends Component {
+  state = {author: '', content:'', posts: []};
   
   handleSumbit = event => {
     event.preventDefault();
@@ -11,10 +28,16 @@ class BlogForm extends React.Component {
       author: this.state.author, 
       content: this.state.content
     }
-    
     axios.post('http://localhost:8080/blog', data)
     .then((res) => this.setState({author: '', content:''}))
-  };
+  }
+  
+  componentDidMount() {
+    axios.get('http://localhost:8080/blog')
+    .then((res) => {
+      this.setState({posts: res.data});
+    })
+  }
   
   render() {
     return (
@@ -36,7 +59,7 @@ class BlogForm extends React.Component {
             label='Content'
             placeholder='Content'
             value={this.state.content}
-            onChange={ e => this.setState({message:e.target.value})}
+            onChange={ e => this.setState({content:e.target.value})}
           />
         </Form.Group>
         <Form.Group widths='equal'>
@@ -49,8 +72,11 @@ class BlogForm extends React.Component {
         </Form.Group>
         <Message success header='Congratulations!' content="Your post will be reviewed and posted" />
       </Form>
+      <BlogPostDisplay post={this.state.posts} />
     )
   }
 }
+
+
 
 export default BlogForm
