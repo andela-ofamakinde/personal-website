@@ -22,6 +22,9 @@ class ContactForm extends React.Component {
         email:'', 
         message:''
       })
+      .catch(err => {
+        console.log(err);
+      })
   };
   
   render() {

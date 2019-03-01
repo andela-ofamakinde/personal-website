@@ -2,25 +2,8 @@ import React, { Component } from 'react';
 import { Form, Input, TextArea, Button, Message } from 'semantic-ui-react';
 import axios from 'axios';
 
-class BlogPostDisplay extends Component {
-  render() {
-    const postMap = this.props.posts.map((post) => {
-      return (
-        <div>
-          <div>{post.author}</div>
-          <div>{post.content}</div>
-          <div>{post.date}</div>
-        </div>
-      )
-    })
-    return(
-      <div>{postMap}</div>
-    );
-  }
-}
-
 class BlogForm extends Component {
-  state = {author: '', content:'', posts: []};
+  state = {author: '', content:''};
   
   handleSumbit = event => {
     event.preventDefault();
@@ -29,16 +12,14 @@ class BlogForm extends Component {
       content: this.state.content
     }
     axios.post('http://localhost:8080/blog', data)
-    .then((res) => this.setState({author: '', content:''}))
-  }
-  
-  componentDidMount() {
-    axios.get('http://localhost:8080/blog')
-    .then((res) => {
-      this.setState({posts: res.data});
+    .then(res => {
+      this.setState({author: '', content:''})
+    })
+    .catch(err => {
+      console.log(err);
     })
   }
-  
+
   render() {
     return (
       <Form success onSubmit={this.handleSumbit}>
@@ -72,7 +53,6 @@ class BlogForm extends Component {
         </Form.Group>
         <Message success header='Congratulations!' content="Your post will be reviewed and posted" />
       </Form>
-      <BlogPostDisplay post={this.state.posts} />
     )
   }
 }

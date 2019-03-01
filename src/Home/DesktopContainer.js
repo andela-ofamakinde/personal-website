@@ -1,22 +1,25 @@
-import PropTypes from 'prop-types'
-import React, { Component } from 'react'
-import HomepageHeading from './HomepageHeading'
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
+import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+
 import {
   Container,
   Menu,
   Responsive,
   Segment,
   Visibility,
-} from 'semantic-ui-react'
-import { BrowserRouter as Router, Route, Link } from "react-router-dom"
-import Blog from './Blog'
-import ContactForm from './ContactForm'
+} from 'semantic-ui-react';
+
+import Blog from '../Blog/BlogForm';
+import ContactForm from '../Contact/ContactForm';
+import HomepageHeading from './HomepageHeading';
+import BlogPostDisplay from '../Blog/BlogDisplay';
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
 
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
-}
+};
 
 class DesktopContainer extends Component {
   state = {}
@@ -54,24 +57,24 @@ class DesktopContainer extends Component {
                   'space-around' }}
                 >
                   <Menu.Item active>
-                  <Link to="/home">Home</Link>
-                  </Menu.Item>
+                  <Link to="/home">Home</Link></Menu.Item>
                   <Menu.Item>Work</Menu.Item>
                   <Menu.Item><Link to="/blog">Blog</Link></Menu.Item>
-                  <Menu.Item>Tutorials</Menu.Item>
+                  <Menu.Item><Link to="/tutorial">Tutorials</Link></Menu.Item>
                   <Menu.Item><Link to="/contact">Find Me</Link></Menu.Item>
                 </Container>
               </Menu>
                 <Route path="/home" component={HomepageHeading} />
                 <Route path="/blog" component={Blog} />
                 <Route path="/contact" component={ContactForm} />
+                <Route path="/tutorial" component={BlogPostDisplay} />
             </Segment>
           </Visibility>
           {children}
         </Responsive>
       </Router>
     )
-}
+  }
 }
 
 DesktopContainer.propTypes = {
