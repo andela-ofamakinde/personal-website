@@ -15,13 +15,33 @@ BlogRouter.route('/').post(function (req, res) {
 });
 
 BlogRouter.route('/').get(function (req, res) {
-  const entry = new BlogPost(req.body);
   BlogPost.find()
     .then(entry => {
       res.json(entry);
     })
     .catch(err => {
-      res.status(400).send("unable to save blog entry to database");
+      res.status(400).send("unable to fetch blog entries");
     });
 });
+
+BlogRouter.route('/:id').get(function (req, res) {
+  BlogPost.findById(req.params.id)
+    .then(entry => {
+      res.json(entry);
+    })
+    .catch(err => {
+      res.status(400).send("unable to fetch blog entry");
+    });
+});
+
+BlogRouter.route('delete/:id').get(function (req, res) {
+  BlogPost.findByIdAndRemove(req.params.id)
+    .then(entry => {
+      res.json(entry);
+    })
+    .catch(err => {
+      res.status(400).send("unable to fetch blog entry");
+    });
+});
+
 module.exports = BlogRouter;
