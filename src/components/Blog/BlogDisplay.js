@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import BlogForm from './BlogForm';
 
 class BlogPostDisplay extends Component {
   state = {posts: []};
@@ -25,7 +26,10 @@ class BlogPostDisplay extends Component {
       )
     })
     return(
-      <div>{postMap}</div>
+      <div>
+        <BlogForm />
+        <div>{postMap}</div>
+      </div>
     );
   }
 }

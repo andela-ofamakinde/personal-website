@@ -13,7 +13,6 @@ import {
 import Blog from '../Blog/BlogForm';
 import ContactForm from '../Contact/ContactForm';
 import HomepageHeading from './HomepageHeading';
-import BlogPostDisplay from '../Blog/BlogDisplay';
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
@@ -60,14 +59,15 @@ class DesktopContainer extends Component {
                   <Link to="/home">Home</Link></Menu.Item>
                   <Menu.Item>Work</Menu.Item>
                   <Menu.Item><Link to="/blog">Blog</Link></Menu.Item>
-                  <Menu.Item><Link to="/tutorial">Tutorials</Link></Menu.Item>
+                  <Menu.Item><Link to="/videos">Videos</Link></Menu.Item>
                   <Menu.Item><Link to="/contact">Find Me</Link></Menu.Item>
                 </Container>
               </Menu>
+                <Route path="/" exact component={HomepageHeading} />
                 <Route path="/home" component={HomepageHeading} />
                 <Route path="/blog" component={Blog} />
                 <Route path="/contact" component={ContactForm} />
-                <Route path="/tutorial" component={BlogPostDisplay} />
+                <Route path="/videos" />
             </Segment>
           </Visibility>
           {children}
