@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import Stream from '../Videos/Stream';
 
 import {
   Container,
@@ -31,19 +32,20 @@ class DesktopContainer extends Component {
     const { fixed } = this.state
 
     return (
-      <Router>
-        <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-          <Visibility
-            once={false}
-            onBottomPassed={this.showFixedMenu}
-            onBottomPassedReverse={this.hideFixedMenu}
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
+        <Visibility
+          once={false}
+          onBottomPassed={this.showFixedMenu}
+          onBottomPassedReverse={this.hideFixedMenu}
+        >
+          <Segment
+            inverted
+            textAlign='center'
+            style={{ minHeight: 700, padding: '1em 0em' }}
+            vertical
           >
-            <Segment
-              inverted
-              textAlign='center'
-              style={{ minHeight: 700, padding: '1em 0em' }}
-              vertical
-            >
+          <Router>
+            <div>
               <Menu
                 fixed={fixed ? 'top' : null}
                 inverted={!fixed}
@@ -67,12 +69,13 @@ class DesktopContainer extends Component {
                 <Route path="/home" component={HomepageHeading} />
                 <Route path="/blog" component={Blog} />
                 <Route path="/contact" component={ContactForm} />
-                <Route path="/videos" />
-            </Segment>
-          </Visibility>
-          {children}
-        </Responsive>
-      </Router>
+                <Route path="/videos" component={Stream}/>
+              </div>
+            </Router>
+          </Segment>
+        </Visibility>
+        {children}
+      </Responsive>
     )
   }
 }
