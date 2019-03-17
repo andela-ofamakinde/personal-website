@@ -1,7 +1,8 @@
-import PropTypes from 'prop-types';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import Stream from '../Videos/Stream';
+import GoogleAuth from '../GoogleAuth';
 
 import {
   Container,
@@ -63,6 +64,7 @@ class DesktopContainer extends Component {
                   <Menu.Item><Link to="/blog">Blog</Link></Menu.Item>
                   <Menu.Item><Link to="/videos">Videos</Link></Menu.Item>
                   <Menu.Item><Link to="/contact">Find Me</Link></Menu.Item>
+                  <GoogleAuth />
                 </Container>
               </Menu>
                 <Route path="/" exact component={HomepageHeading} />
