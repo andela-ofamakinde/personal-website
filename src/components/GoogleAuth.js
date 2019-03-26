@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { signIn, signOut } from '../actions';
 
 class GoogleAuth extends Component {
   state = { isSignedIn: null };
@@ -6,7 +8,7 @@ class GoogleAuth extends Component {
   componentDidMount() {
     window.gapi.load('client:auth2', () => {
       window.gapi.client.init({
-        clientId: '',
+        clientId: '849789078384-ldmsdnpsgb2fa6rucn1s916vk1hf4301.apps.googleusercontent.com',
         scope: 'email'
       }).then(() => {
         this.auth = window.gapi.auth2.getAuthInstance();
@@ -16,8 +18,12 @@ class GoogleAuth extends Component {
     })
   };
   
-  onAuthChange = () => {
-    this.setState({ isSignedIn: this.auth.isSignedIn.get() })
+  onAuthChange = (isSignedIn) => {
+    if(isSignedIn) {
+      this.props.signIn()
+    } else {
+      this.props.signOut()
+    }
   };
   
   onSignIn = () => {
@@ -51,4 +57,4 @@ class GoogleAuth extends Component {
   }
 }
 
-export default GoogleAuth;
+export default connect(null, { signIn, signOut })(GoogleAuth);
